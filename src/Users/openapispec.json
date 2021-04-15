@@ -1,0 +1,132 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Users",
+    "description": "API REST Users em netcore 5",
+    "contact": {
+      "name": "Squad X",
+      "url": "https://gitlab.com/meurepo",
+      "email": "squadx@email.com"
+    },
+    "version": "v1"
+  },
+  "paths": {
+    "/Users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Obtêm todos os users",
+        "description": "Este recurso lista todos os users cadastrados",
+        "operationId": "GetAll_Users",
+        "responses": {
+          "200": {
+            "description": "The list of users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Cria um user",
+        "description": "Este recurso cria um user",
+        "operationId": "Create_Users",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "An user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Users/{userId}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Obtêm um user pelo seu Id",
+        "description": "Este recurso apresenta o user",
+        "operationId": "GetById_Users",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
